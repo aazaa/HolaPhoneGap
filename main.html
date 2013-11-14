@@ -1,0 +1,48 @@
+Enter file contents here<html>
+<head>
+<title>Ejemplo de Geolocation</title>
+<script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+
+// Espere a que PhoneGap se inicie
+//
+document.addEventListener("deviceready", onDeviceReady, false);
+
+
+// PhoneGap esta listo
+//
+function onDeviceReady() {
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
+}
+
+
+// Muestra los atributos de `Position`.
+//
+function onSuccess(position) {
+var div = document.getElementById('myDiv');
+
+
+div.innerHTML = 'Latitud: ' + position.coords.latitude + '<br/>' +
+'Longitud: ' + position.coords.longitude + '<br/>' +
+'Altitud: ' + position.coords.altitude + '<br/>' +
+'Precisión: ' + position.coords.accuracy + '<br/>' +
+'Precisión Altitud: ' + position.coords.altitudeAccuracy + '<br/>' +
+'Dirección: ' + position.coords.heading + '<br/>' +
+'Velocidadd: ' + position.coords.speed + '<br/>';
+}
+
+
+// Muestra una alerta si ocurre un problema obteniendo la geolocalización
+//
+function onError() {
+alert('onError!');
+}
+
+
+</script>
+</head>
+<body>
+<div id="myDiv"></div>
+</body>
+</htm

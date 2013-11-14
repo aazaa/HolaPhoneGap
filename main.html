@@ -1,24 +1,45 @@
-<!DOCTYPE html><html>
-<head>    
+<!DOCTYPE html>
+<html>
+<head>
 <title>Ejemplo de Geolocation</title>
+
 <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
-<script type="text/javascript" charset="utf-8">   
-// Espere a que PhoneGap se inicie     
-document.addEventListener("deviceready", onDeviceReady, false);  
-  // PhoneGap esta listo    //    
-function onDeviceReady() 
-{        
-navigator.geolocation.getCurrentPosition(onSuccess, onError);    
-}  // onSuccess Geolocation    //    
+<script type="text/javascript" charset="utf-8">
 
-function onSuccess(position) 
+// Espere a que PhoneGap se inicie
+//
+document.addEventListener("deviceready", onDeviceReady, false);
 
-{        var element = document.getElementById('geolocation');       
+// PhoneGap esta listo
+//
+function onDeviceReady() {
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
+}
 
- element.innerHTML = 'Latitud: '           + position.coords.latitude              + '<br />' +          'Longitud: '        + position.coords.longitude         + '\n' +          'Altitud: '         + position.coords.altitude          + '\n' +          'Precisión: '       + position.coords.accuracy          + '\n' +          'Precisión altitud' + position.coords.altitudeAccuracy  + '\n' +          'Dirección: '       + position.coords.heading           + '\n' +          'Velocidad: '       + position.coords.speed             + '\n' +          'Timestamp: '       + new Date(position.timestamp)      + '\n');    }    // La función 'callback' onError recibe un objeto `PositionError`.    //    function onError(error) {        alert('código: '    + error.code    + '\n' +              'mensaje: ' + error.message + '\n');    }    </script>  </head>  
-<body>    
-<p id="geolocation">Buscando geolocalización...</p>  
+// onSuccess Geolocation
+//
+function onSuccess(position) {
+var element = document.getElementById('geolocation');
+element.innerHTML = 'Latitud: ' + position.coords.latitude + '<br />' +
+'Longitud: ' + position.coords.longitude + '\n' +
+'Altitud: ' + position.coords.altitude + '\n' +
+'Precisión: ' + position.coords.accuracy + '\n' +
+'Precisión altitud' + position.coords.altitudeAccuracy + '\n' +
+'Dirección: ' + position.coords.heading + '\n' +
+'Velocidad: ' + position.coords.speed + '\n' +
+'Timestamp: ' + new Date(position.timestamp) + '\n';
+}
 
+// La función 'callback' onError recibe un objeto `PositionError`.
+//
+function onError(error) {
+alert('código: ' + error.code + '\n' +
+'mensaje: ' + error.message + '\n');
+}
+
+</script>
+</head>
+<body>
+<p id="geolocation">Buscando geolocalización...</p>
 </body>
-
 </html>

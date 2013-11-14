@@ -2,7 +2,6 @@
 <html>
 <head>
 <title>Ejemplo de Geolocation</title>
-
 <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
 <script type="text/javascript" charset="utf-8">
 
@@ -16,30 +15,29 @@ function onDeviceReady() {
 navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 
-// onSuccess Geolocation
+// Muestra los atributos de `Position`.
 //
 function onSuccess(position) {
-var element = document.getElementById('geolocation');
-element.innerHTML = 'Latitud: ' + position.coords.latitude + '<br />' +
-'Longitud: ' + position.coords.longitude + '\n' +
-'Altitud: ' + position.coords.altitude + '\n' +
-'Precisión: ' + position.coords.accuracy + '\n' +
-'Precisión altitud' + position.coords.altitudeAccuracy + '\n' +
-'Dirección: ' + position.coords.heading + '\n' +
-'Velocidad: ' + position.coords.speed + '\n' +
-'Timestamp: ' + new Date(position.timestamp) + '\n';
+var div = document.getElementById('myDiv');
+
+div.innerHTML = 'Latitud: ' + position.coords.latitude + '<br/>' +
+'Longitud: ' + position.coords.longitude + '<br/>' +
+'Altitud: ' + position.coords.altitude + '<br/>' +
+'Precisión: ' + position.coords.accuracy + '<br/>' +
+'Precisión Altitud: ' + position.coords.altitudeAccuracy + '<br/>' +
+'Dirección: ' + position.coords.heading + '<br/>' +
+'Velocidadd: ' + position.coords.speed + '<br/>';
 }
 
-// La función 'callback' onError recibe un objeto `PositionError`.
+// Muestra una alerta si ocurre un problema obteniendo la geolocalización
 //
-function onError(error) {
-alert('código: ' + error.code + '\n' +
-'mensaje: ' + error.message + '\n');
+function onError() {
+alert('onError!');
 }
 
 </script>
 </head>
 <body>
-<p id="geolocation">Buscando geolocalización...</p>
+<div id="myDiv"></div>
 </body>
 </html>

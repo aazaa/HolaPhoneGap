@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+    <script language="javascript">
+        function get_loc() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(coordenadas);
+            }else{
+                alert('Tu navegador no soporta la API de geolocalizacion');
+            }
+        }
+        
+        function coordenadas(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            var map = document.getElementById("mapa");
+            map.src = "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lon + "&zoom=15&size=400x400&markers=color:green|label:A|" + lat + "," + lon + "&sensor=false";
+        }
+        
+        </script>
+    
+    <a href="javascript:get_loc();">Mostrar localización</a></BR>
+    </p>
+    <p><img id="mapa" src=""></p>
+</body>
+</html>

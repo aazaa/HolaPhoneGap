@@ -1,151 +1,13 @@
 <!DOCTYPE HTML>
-<html>
+<html style="height:100%; width:100%">
  
 <head>
  
     <meta charset="utf-8"> 
-    <title>Llamadas a la API</title>
-     
-    <script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"></script>
-     
-    <script>
- 
-        // ====================================================================
-        // Gestión del ciclo de vida de la app
-        // --------------------------------------------------------------------
-         
-        // Eventos Phonegap
-        document.addEventListener("deviceready", aplicacionIniciada, false); // Al inciar la app
-        document.addEventListener("pause", aplicacionPausada, false);        // Al pausar la app
-        document.addEventListener("resume", aplicacionReiniciada, false);    // Al reiniciar la app
-        document.addEventListener("online", phonegapOnline, false);          // Phonegap tiene acceso a internet
-        document.addEventListener("offline", phonegapOffline, false);        // Phonegap NO tiene acceso a internet
-        document.addEventListener("backbutton", atrasPulsado, false);        // Se ha pulsado la tecla atrás
-        document.addEventListener("menubutton", menuPulsado, false);         // Se ha pulsado la tecla menú
-        document.addEventListener("searchbutton", menuPulsado, false);       // Se ha pulsado la tecla búsqueda
-         
-        /**
-         * Aplicación iniciada
-         */
-        function aplicacionIniciada()
-        {
-        }
- 
-        /**
-         * Aplicación pausada
-         */
-        function aplicacionPausada()
-        {
-        }
- 
-        /**
-         * Aplicación reiniciada
-         */
-        function aplicacionReiniciada()
-        {
-        }
- 
-        /**
-         * Phonegap tiene acceso a internet
-         */
-        function phonegapOnline()
-        {
-        }
- 
-        /**
-         * Phonegap NO tiene acceso a internet
-         */
-        function phonegapOffline()
-        {
-        }
- 
-        /**
-         * Se ha pulsado la tecla atrás
-         */
-        function atrasPulsado()
-        {
-        }
- 
-        /**
-         * Se ha pulsado la tecla atrás
-         */
-        function menuPulsado()
-        {
-        }
- 
-        /**
-         * Se ha pulsado la tecla búsqueda
-         */
-        function busquedaPulsado()
-        {
-        }
-         
-        // ====================================================================
-        // Llamadas a la API
-        // --------------------------------------------------------------------
-         
-        /**
-         * Pruebas de la API
-         */
-        function probarApi()
-        {
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        }
-         
-        /**
-         * http://docs.phonegap.com/en/1.0.0/phonegap_geolocation_geolocation.md.html#Geolocation
-         */
-        function onSuccess(position) 
-        {
-            var mensaje =
-                'Latitude: '          + position.coords.latitude          + '\n' +
-                'Longitude: '         + position.coords.longitude         + '\n' +
-                'Altitude: '          + position.coords.altitude          + '\n' +
-                'Accuracy: '          + position.coords.accuracy          + '\n' +
-                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-                'Heading: '           + position.coords.heading           + '\n' +
-                'Speed: '             + position.coords.speed             + '\n' +
-                'Timestamp: '         + new Date(position.timestamp)      + '\n';
-                           
-            alert
-            (
-                mensaje,        // message
-                alertDismissed, // callback
-                '¡Error!',      // title
-                '¡Hecho!'       // buttonName
-            );
-        };
- 
-        /**
-         * http://docs.phonegap.com/en/1.0.0/phonegap_geolocation_geolocation.md.html#Geolocation
-         */
-        function onError(error)
-        {
-            var mensaje =
-                'code: '    + error.code    + '\n' +
-                'message: ' + error.message + '\n';
-                           
-            navigator.notification.alert
-            (
-                mensaje,        // message
-                alertDismissed, // callback
-                '¡Error!',      // title
-                '¡Hecho!'       // buttonName
-            );
-        }
- 
-        /**
-         * http://docs.phonegap.com/en/1.0.0/phonegap_notification_notification.md.html#Notification
-         */
-        function alertDismissed()
-        {
-        }
-         
-    </script>
-     
+    <title>Llamadas a la API</title>  
 </head>
  
-<body style="margin: 20px; text-align: center;">
+<body style="margin: 20px; text-align: center; height:100%; width:100%">
   
     <h1 style="margin: 0px; padding: 0px;">Llamadas a la API</h1>
     <hr/>
@@ -155,8 +17,136 @@
     </p>
      
     <hr/>
-    <a href="http://androide.hijodeblog.com" target="new">Diario de un Androide</a><br/>
-   <a href="ubicactual.html">Mapa del lugar</a><br/>
+    <div id="div_mapa" style="height:70%; width:100%"></div>
 </body>
  
+     <script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCTwSyuSvqrNmXA32DrIrHf1VMBx02o0HE&sensor=false"></script>
+     
+    <script>
+
+        var pos_obelisco = new google.maps.LatLng(-34.603683, -58.381569);
+        var mapOptions = {
+            zoom: 18,
+            center: pos_obelisco,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var mapa = new google.maps.Map($("#div_mapa")[0], mapOptions);
+
+        // ====================================================================
+        // Gestión del ciclo de vida de la app
+        // --------------------------------------------------------------------
+
+        // Eventos Phonegap
+        //        document.addEventListener("deviceready", aplicacionIniciada, false); // Al inciar la app
+        //        document.addEventListener("pause", aplicacionPausada, false);        // Al pausar la app
+        //        document.addEventListener("resume", aplicacionReiniciada, false);    // Al reiniciar la app
+        //        document.addEventListener("online", phonegapOnline, false);          // Phonegap tiene acceso a internet
+        //        document.addEventListener("offline", phonegapOffline, false);        // Phonegap NO tiene acceso a internet
+        //        document.addEventListener("backbutton", atrasPulsado, false);        // Se ha pulsado la tecla atrás
+        //        document.addEventListener("menubutton", menuPulsado, false);         // Se ha pulsado la tecla menú
+        //        document.addEventListener("searchbutton", menuPulsado, false);       // Se ha pulsado la tecla búsqueda
+
+        /**
+        * Aplicación iniciada
+        */
+        function aplicacionIniciada() {
+        }
+
+        /**
+        * Aplicación pausada
+        */
+        function aplicacionPausada() {
+        }
+
+        /**
+        * Aplicación reiniciada
+        */
+        function aplicacionReiniciada() {
+        }
+
+        /**
+        * Phonegap tiene acceso a internet
+        */
+        function phonegapOnline() {
+        }
+
+        /**
+        * Phonegap NO tiene acceso a internet
+        */
+        function phonegapOffline() {
+        }
+
+        /**
+        * Se ha pulsado la tecla atrás
+        */
+        function atrasPulsado() {
+        }
+
+        /**
+        * Se ha pulsado la tecla atrás
+        */
+        function menuPulsado() {
+        }
+
+        /**
+        * Se ha pulsado la tecla búsqueda
+        */
+        function busquedaPulsado() {
+        }
+
+        // ====================================================================
+        // Llamadas a la API
+        // --------------------------------------------------------------------
+
+        /**
+        * Pruebas de la API
+        */
+        function probarApi() {
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
+
+        /**
+        * http://docs.phonegap.com/en/1.0.0/phonegap_geolocation_geolocation.md.html#Geolocation
+        */
+        function onSuccess(position) {
+
+            var mensaje =
+                'Latitude: ' + position.coords.latitude + '\n' +
+                'Longitude: ' + position.coords.longitude + '\n' +
+                'Altitude: ' + position.coords.altitude + '\n' +
+                'Accuracy: ' + position.coords.accuracy + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+                'Heading: ' + position.coords.heading + '\n' +
+                'Speed: ' + position.coords.speed + '\n' +
+                'Timestamp: ' + new Date(position.timestamp) + '\n';
+
+            var pos_actual = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            mapa.panTo(pos_actual);
+        };
+
+        /**
+        * http://docs.phonegap.com/en/1.0.0/phonegap_geolocation_geolocation.md.html#Geolocation
+        */
+        function onError(error) {
+            var mensaje =
+                'code: ' + error.code + '\n' +
+                'message: ' + error.message + '\n';
+
+            navigator.notification.alert
+            (
+                mensaje,        // message
+                alertDismissed, // callback
+                '¡Error!',      // title
+                '¡Hecho!'       // buttonName
+            );
+        }
+
+        /**
+        * http://docs.phonegap.com/en/1.0.0/phonegap_notification_notification.md.html#Notification
+        */
+        function alertDismissed() {
+        }
+    </script>
 </html>

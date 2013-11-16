@@ -34,6 +34,15 @@
         };
         var mapa = new google.maps.Map($("#div_mapa")[0], mapOptions);
 
+        var marker = new google.maps.Marker({
+            position: pos_obelisco,
+            map: mapa,
+
+            title: "Nada"
+
+        });
+
+
         // ====================================================================
         // Gestión del ciclo de vida de la app
         // --------------------------------------------------------------------
@@ -124,6 +133,10 @@
 
             var pos_actual = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             mapa.panTo(pos_actual);
+
+            marker.setPosition(pos_actual);
+
+
         };
 
         /**

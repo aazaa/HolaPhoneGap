@@ -17,15 +17,17 @@
     </p>
      
     <hr/>
-       <div id="div_distancia"  style="height:50%; width:50%"></div>
+       <div id="div_distancia"></div>
        <hr/>
     <div id="div_mapa" style="height:70%; width:100%"></div>
 </body>
  
      <script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCTwSyuSvqrNmXA32DrIrHf1VMBx02o0HE&sensor=false"></script>
-     
+ 
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCTwSyuSvqrNmXA32DrIrHf1VMBx02o0HE&sensor=false&libraries=geometry"></script>
+   
+  
     <script>
 
         var pos_obelisco = new google.maps.LatLng(-34.603683, -58.381569);
@@ -141,9 +143,9 @@
 
             var pos_obelisco2 = new google.maps.LatLng(-34.603683, -58.381569);
 
-            var distancia = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco2);
+            var distancia = new google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco2);
             //$("#div_distancia").text(distancia);
-
+            alert(distancia);     
             var mensaje_dis = 'Distancia al obelisco:' + distancia + ' mts.'
 
             document.getElementById('div_distancia').innerHTML = mensaje_dis;

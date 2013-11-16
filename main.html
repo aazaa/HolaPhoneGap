@@ -17,6 +17,8 @@
     </p>
      
     <hr/>
+       <div id="div_distancia"></div>
+       <hr/>
     <div id="div_mapa" style="height:70%; width:100%"></div>
 </body>
  
@@ -38,7 +40,7 @@
             position: pos_obelisco,
             map: mapa,
 
-            title: "Nada"
+            title: ""
 
         });
 
@@ -135,6 +137,17 @@
             mapa.panTo(pos_actual);
 
             marker.setPosition(pos_actual);
+
+
+            var pos_obelisco2 = new google.maps.LatLng(-34.603683, -58.381569);
+
+            var distancia = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco2);
+            //$("#div_distancia").text(distancia);
+
+            var mensaje_dis = 'Distancia al obelisco:' + distancia + ' mts.'
+
+            document.getElementById('div_distancia').innerHTML = mensaje_dis;
+
 
             setTimeout(probarApi, 1000);
 

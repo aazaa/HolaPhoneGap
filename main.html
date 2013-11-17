@@ -21,24 +21,24 @@
 
           <div id="div_titulo_otros_lugares"style="height:5%; width:90%; font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
              
-       <div id="div_lugar_actual"></div>
-       <div id="div_descrip_obelisco" style="height:10%; width:90%;font-weight:bold;"></div>
+       
+       <div id="div_descrip_obelisco"></div>
        <br> 
-       <div id="div_distancia_obelisco" style="height:5%; width:90%; font-style:italic; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
+       <div id="div_distancia_obelisco" ></div>
 
      
        
-        <div id="div_descrip_la_boca" style="height:10%; width:90%;font-weight:bold;"></div>
+        <div id="div_descrip_la_boca" ></div>
         <br> 
-       <div id="div_distancia_la_boca" style="height:5%; width:90%; font-style:italic; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
-    
+       <div id="div_distancia_la_boca"></div>
+     <br> 
 
 
-      <div id="div_descrip_tigre" style="height:10%; width:90%;font-weight:bold;"></div>
-       <div id="div_distancia_tigre" style="height:5%; width:90%; font-style:italic; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
+      <div id="div_descrip_tigre"></div>
+       <div id="div_distancia_tigre" ></div>
        <hr/>
        
-  <div id="titulo_mapa" style="height:5%; width:90%;font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline">Mapa general</div>
+
     <div id="div_mapa" style="height:70%; width:100%"></div>
 </body>
  
@@ -168,39 +168,39 @@
            var distancia_obelisco = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco);
            var distancia_boca = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_boca);
            var distancia_tigre = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_tigre);
-          
 
 
+           var mensaje_dis = '';
             if (distancia_obelisco > 999) 
             {
-                var mensaje_dis = 'Distancia al obelisco: ' + ((distancia_obelisco / 1000)).toFixed(2).toString() + ' Kmt/s.';
+                 mensaje_dis = 'Distancia al obelisco: ' + ((distancia_obelisco / 1000)).toFixed(2).toString() + ' Kmt/s.';
 
             }
             else {
-                var mensaje_dis = 'Distancia al obelisco: ' + distancia_obelisco.toFixed(2).toString() + ' mts.';
+                 mensaje_dis = 'Distancia al obelisco: ' + distancia_obelisco.toFixed(2).toString() + ' mts.';
             }
 
 
-
+            var mensaje_dis_boca = '';
             if (distancia_boca > 999) 
             {
-                var mensaje_dis_boca = 'Distancia a La Boca: ' + ((distancia_boca / 1000)).toFixed(2).toString() + ' Kmt/s.';
+                mensaje_dis_boca = 'Distancia a La Boca: ' + ((distancia_boca / 1000)).toFixed(2).toString() + ' Kmt/s.';
 
             }
             else
             {
-                var mensaje_dis_boca = 'Distancia a La Boca: ' + distancia_boca.toFixed(2).toString() + ' mts.';
+                mensaje_dis_boca = 'Distancia a La Boca: ' + distancia_boca.toFixed(2).toString() + ' mts.';
             }
 
-
+            var mensaje_dis_tigre = '';
              if (distancia_tigre > 999) 
             {
-                var mensaje_dis_tigre = 'Distancia a Tigre: ' + ((distancia_tigre / 1000)).toFixed(2).toString() + ' Kmt/s.';
+                 mensaje_dis_tigre = 'Distancia a Tigre: ' + ((distancia_tigre / 1000)).toFixed(2).toString() + ' Kmt/s.';
 
             }
             else
             {
-                var mensaje_dis_tigre = 'Distancia a Tigre: ' + distancia_tigre.toFixed(2).toString() + ' mts.';
+                 mensaje_dis_tigre = 'Distancia a Tigre: ' + distancia_tigre.toFixed(2).toString() + ' mts.';
             }
 
 
@@ -242,7 +242,7 @@
             document.getElementById('div_descrip_tigre').innerHTML = descrip_tigre;
 
             document.getElementById('div_distancia_tigre').innerHTML = mensaje_dis_tigre;
-            document.getElementById('titulo_mapa').innerHTML = 'Ud está aquí / You are here';
+//            document.getElementById('titulo_mapa').innerHTML = 'Ud está aquí / You are here';
 
             setTimeout(probarApi, 1000);
 

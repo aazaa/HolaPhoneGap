@@ -13,7 +13,7 @@
     <hr/>
      
     <p style="margin: 0px; padding: 10px 0px 10px 0px;">
-        <a href="javascript: probarApi();">Ubicarme en mapa / Show me on map</a>
+        <a href="javascript: probarApi();">Ubicarme en mapa</a>
     </p>
      
 
@@ -145,15 +145,15 @@
         */
         function onSuccess(position) {
 
-            var mensaje =
-                'Latitude: ' + position.coords.latitude + '\n' +
-                'Longitude: ' + position.coords.longitude + '\n' +
-                'Altitude: ' + position.coords.altitude + '\n' +
-                'Accuracy: ' + position.coords.accuracy + '\n' +
-                'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-                'Heading: ' + position.coords.heading + '\n' +
-                'Speed: ' + position.coords.speed + '\n' +
-                'Timestamp: ' + new Date(position.timestamp) + '\n';
+//            var mensaje =
+//                'Latitude: ' + position.coords.latitude + '\n' +
+//                'Longitude: ' + position.coords.longitude + '\n' +
+//                'Altitude: ' + position.coords.altitude + '\n' +
+//                'Accuracy: ' + position.coords.accuracy + '\n' +
+//                'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+//                'Heading: ' + position.coords.heading + '\n' +
+//                'Speed: ' + position.coords.speed + '\n' +
+//                'Timestamp: ' + new Date(position.timestamp) + '\n';
 
             var pos_actual = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             mapa.panTo(pos_actual);
@@ -161,13 +161,13 @@
             marker.setPosition(pos_actual);
 
 
-            var pos_obelisco2 = new google.maps.LatLng(-34.603683, -58.381569);
+           
             var pos_boca = new google.maps.LatLng(-34.635786, -58.364893);
             var pos_tigre = new google.maps.LatLng(-34.423691, -58.578858);
 
            var distancia_obelisco = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco);
-           var distancia_boca = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_boca);
-           var distancia_tigre = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_tigre);
+           
+          
 
 
            var mensaje_dis = '';
@@ -181,7 +181,8 @@
             }
 
 
-            var mensaje_dis_boca = '';
+             var mensaje_dis_boca = '';
+             var distancia_boca = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_boca);
             if (distancia_boca > 999) 
             {
                 mensaje_dis_boca = 'Distancia a La Boca: ' + ((distancia_boca / 1000)).toFixed(2).toString() + ' Kmt/s.';
@@ -193,6 +194,7 @@
             }
 
             var mensaje_dis_tigre = '';
+            var distancia_tigre = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_tigre);
              if (distancia_tigre > 999) 
             {
                  mensaje_dis_tigre = 'Distancia a Tigre: ' + ((distancia_tigre / 1000)).toFixed(2).toString() + ' Kmt/s.';
@@ -205,7 +207,7 @@
 
 
 
-            var titulo = '- Otros lugares para visitar / Other places  -'
+            var titulo = '- Otros lugares para visitar -'
 
             var descrip_obelisco = ' Obelisco de Buenos Aires: es un monumento considerado un ícono de la ciudad de Buenos Aires, visita turística obligada, construido en 1936.' +
             ' Está ubicado en la intersección de las avenidas Corrientes y 9 de Julio.';
@@ -221,28 +223,20 @@
             var mensaje_tigre = mensaje_dis_tigre;
 
            
-            document.getElementById('div_titulo_otros_lugares').innerHTML = titulo;
-
-           
-
-            document.getElementById('div_descrip_obelisco').innerHTML = descrip_obelisco;
-
-         
+            document.getElementById('div_titulo_otros_lugares').innerHTML = titulo.toString();
+            document.getElementById('div_descrip_obelisco').innerHTML = descrip_obelisco.toString() ;
             document.getElementById('div_distancia_obelisco').innerHTML = mensaje_dis;
 
 
-        
             document.getElementById('div_descrip_la_boca').innerHTML = descrip_boca;
-
-
- 
             document.getElementById('div_distancia_la_boca').innerHTML = mensaje_dis_boca;
-
-          
             document.getElementById('div_descrip_tigre').innerHTML = descrip_tigre;
-
             document.getElementById('div_distancia_tigre').innerHTML = mensaje_dis_tigre;
+
+            alert('LLegó al final');
 //            document.getElementById('titulo_mapa').innerHTML = 'Ud está aquí / You are here';
+
+
 
             setTimeout(probarApi, 1000);
 

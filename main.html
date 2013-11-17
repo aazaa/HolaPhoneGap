@@ -19,26 +19,28 @@
 
       <hr/>
 
-          <div id="div_titulo_otros_lugares"style="height:5%; width:90%; font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
-             
+          <div id="div_titulo_otros_lugares"style="font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
+                <br> 
        
        <div id="div_descrip_obelisco"></div>
        <br> 
-       <div id="div_distancia_obelisco" ></div>
+       <div id="div_distancia_obelisco" style="font-weight:bold;text-decoration: underline" ></div>
 
-     
+        <br> 
        
         <div id="div_descrip_la_boca" ></div>
         <br> 
-       <div id="div_distancia_la_boca"></div>
+       <div id="div_distancia_la_boca" style="font-weight:bold;text-decoration: underline" ></div>
      <br> 
 
 
       <div id="div_descrip_tigre"></div>
-       <div id="div_distancia_tigre" ></div>
+      <br> 
+       <div id="div_distancia_tigre" style="font-weight:bold;text-decoration: underline" ></div>
        <hr/>
-       
-
+       <br> 
+            <div id="titulo_mapa" style="font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline">Mapa General</div>
+               <br> 
     <div id="div_mapa" style="height:70%; width:100%"></div>
 </body>
  
@@ -233,8 +235,8 @@
             document.getElementById('div_descrip_tigre').innerHTML = descrip_tigre;
             document.getElementById('div_distancia_tigre').innerHTML = mensaje_dis_tigre;
 
-            alert('LLegó al final');
-//            document.getElementById('titulo_mapa').innerHTML = 'Ud está aquí / You are here';
+        
+            document.getElementById('titulo_mapa').innerHTML = 'Ud está aquí / You are here';
 
 
 

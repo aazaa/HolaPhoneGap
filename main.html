@@ -4,21 +4,41 @@
 <head>
  
     <meta charset="utf-8"> 
-    <title>Llamadas a la API</title>  
+    <title>TFI 2013-Tour Guide Apk</title>  
 </head>
  
-<body style="margin: 20px; text-align: center; height:100%; width:100%">
+<body style="margin: 20px; text-align: center; height:100%; width:100%; background-color:#F5F5F5">
   
-    <h1 style="margin: 0px; padding: 0px;">Llamadas a la API</h1>
+    <h1 style="margin: 0px; padding: 0px; background-color:Blue; font-family:arial;color:white" >TFI 2013 - Tour Guide Apk -</h1>
     <hr/>
      
     <p style="margin: 0px; padding: 10px 0px 10px 0px;">
-        <a href="javascript: probarApi();">Ejecutar llamadas a la API</a>
+        <a href="javascript: probarApi();">Ubicarme en mapa / Show me on map</a>
     </p>
      
-    <hr/>
-       <div id="div_distancia"></div>
+
+      <hr/>
+
+          <div id="div_titulo_otros_lugares"style="height:2%; width:90%; font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
+               <hr/>
+       <div id="div_lugar_actual"></div>
+       <div id="div_descrip_obelisco" style="height:2%; width:90%;font-weight:bold;"></div>
+       <br> 
+       <div id="div_distancia_obelisco" style="height:3%; width:90%; font-style:italic; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
+
+        <hr/>
+       
+        <div id="div_descrip_la_boca" style="height:2%; width:90%;font-weight:bold;"></div>
+        <br> 
+       <div id="div_distancia_la_boca" style="height:3%; width:90%; font-style:italic; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
+         <hr/>
+
+
+      <div id="div_descrip_tigre" style="height:5%; width:90%;font-weight:bold;"></div>
+       <div id="div_distancia_tigre" style="height:3%; width:90%; font-style:italic; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
        <hr/>
+       
+  <div id="titulo_mapa" style="height:5%; width:90%;font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline">Mapa general</div>
     <div id="div_mapa" style="height:70%; width:100%"></div>
 </body>
  
@@ -142,14 +162,88 @@
 
 
             var pos_obelisco2 = new google.maps.LatLng(-34.603683, -58.381569);
+            var pos_boca = new google.maps.LatLng(-34.635786, -58.364893);
+            var pos_tigre = new google.maps.LatLng(-34.423691, -58.578858);
 
-            var distancia = new google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco2);
-            //$("#div_distancia").text(distancia);
-            alert(distancia);
-            var mensaje_dis = 'Distancia al obelisco:' + distancia + ' mts.';
+           var distancia_obelisco = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco);
+           var distancia_boca = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_boca);
+           var distancia_tigre = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_tigre);
+          
 
-            document.getElementById('div_distancia').innerHTML = mensaje_dis;
 
+            if (distancia_obelisco > 999) 
+            {
+                var mensaje_dis = 'Distancia al obelisco: ' + ((distancia_obelisco / 1000)).toFixed(2).toString() + ' Kmt/s.';
+
+            }
+            else {
+                var mensaje_dis = 'Distancia al obelisco: ' + distancia_obelisco.toFixed(2).toString() + ' mts.';
+            }
+
+
+
+            if (distancia_boca > 999) 
+            {
+                var mensaje_dis_boca = 'Distancia a La Boca: ' + ((distancia_boca / 1000)).toFixed(2).toString() + ' Kmt/s.';
+
+            }
+            else
+            {
+                var mensaje_dis_boca = 'Distancia a La Boca: ' + distancia_boca.toFixed(2).toString() + ' mts.';
+            }
+
+
+             if (distancia_tigre > 999) 
+            {
+                var mensaje_dis_tigre = 'Distancia a Tigre: ' + ((distancia_tigre / 1000)).toFixed(2).toString() + ' Kmt/s.';
+
+            }
+            else
+            {
+                var mensaje_dis_tigre = 'Distancia a Tigre: ' + distancia_tigre.toFixed(2).toString() + ' mts.';
+            }
+
+
+
+            var titulo = '- Otros lugares para visitar / Other places  -'
+
+            var descrip_obelisco = ' Obelisco de Buenos Aires: es un monumento considerado un ícono de la ciudad de Buenos Aires, visita turística obligada, construido en 1936.' +
+            ' Está ubicado en la intersección de las avenidas Corrientes y 9 de Julio.';
+
+//            var mensaje_obelisco = (descrip_obelisco).toString() + '\n' + '\n' + mensaje_dis.toString();
+         
+          
+            var descrip_boca = 'Barrio de la Boca: Característicamente colorido a orillas del Riachuelo, con aire nostálgico aunque alegre. Así es el barrio de La Boca.Figura entre los sectores porteños más visitados por los turistas, debido a su esencia tanguera, su expresión artística, sus tradiciones y su pasión futbolera.';
+            var mensaje_boca = mensaje_dis_boca;
+
+
+            var descrip_tigre = 'Tigre:Fluvial, pintoresca y serena, la ciudad de Tigre se sitúa al noreste de la provincia de Buenos Aires instituyéndose como uno de sus más conocidos centros turísticos, y basando su propuesta en excursiones navegables, estadías en islas y alternativas portuarias.';
+            var mensaje_tigre = mensaje_dis_tigre;
+
+            document.getElementById('div_titulo_otros_lugares').style.visibility = 'visible';
+            document.getElementById('div_titulo_otros_lugares').innerHTML = titulo;
+
+            document.getElementById('div_descrip_obelisco').style.visibility = 'visible';
+
+            document.getElementById('div_descrip_obelisco').innerHTML = descrip_obelisco;
+
+            document.getElementById('div_distancia_obelisco').style.visibility = 'visible';
+            document.getElementById('div_distancia_obelisco').innerHTML = mensaje_dis;
+
+
+            document.getElementById('div_descrip_la_boca').style.visibility = 'visible';
+            document.getElementById('div_descrip_la_boca').innerHTML = descrip_boca;
+
+
+            document.getElementById('div_distancia_la_boca').style.visibility = 'visible';
+            document.getElementById('div_distancia_la_boca').innerHTML = mensaje_dis_boca;
+
+            document.getElementById('div_descrip_tigre').style.visibility = 'visible';
+            document.getElementById('div_descrip_tigre').innerHTML = descrip_tigre;
+
+            document.getElementById('div_distancia_tigre').style.visibility = 'visible';
+            document.getElementById('div_distancia_tigre').innerHTML = mensaje_dis_tigre;
+            document.getElementById('titulo_mapa').innerHTML = 'Ud está aquí / You are here';
 
             setTimeout(probarApi, 1000);
 

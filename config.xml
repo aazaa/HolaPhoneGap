@@ -7,14 +7,14 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>TFI-APK Tour Guide</name>
+    <name>TFI-APK Pedidos Briny</name>
 
     <description>
-        TFI-2013-Zambrano
+        TFI-2015-Iglesias
     </description>
 
     <author href="https://build.phonegap.com" email="support@phonegap.com">
-       Ariel Zambrano 
+       Fernando Iglesias 
     </author>
         
     <access origin="*"/>

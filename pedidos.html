@@ -1,0 +1,393 @@
+<!DOCTYPE HTML>
+<html style="height:100%; width:100%">
+ 
+<head>
+ 
+    <meta charset="utf-8"> 
+    <title>TFI 2015-Mayorista Briny</title>  
+</head>
+ 
+<body style="margin: 20px; text-align: center; height:100%; width:100%; background-color:#F5F5F5">
+  
+    <h1 style="margin: 0px; padding: 0px; background-color:green; font-family:arial;color:white" >Mayorista Briny-Aprob de pedidos</h1>
+    <hr/>
+     
+
+    
+    <div id ="login">
+<h2>Nros de Pedido Pendientes</h2>
+
+
+<div id="div_checkboxes"> 
+
+
+</div>
+
+      
+
+    </div>
+
+
+
+    <p style="margin: 0px; padding: 10px 0px 10px 0px;">
+        <a href="javascript: probarApi();">Consultar</a>
+    </p>
+     
+
+      <hr/>
+	  
+	  <p style="margin: 0px; padding: 10px 0px 10px 0px;">
+        <a href="javascript: probarApi2();">Aprobar</a>
+    </p>
+
+<!--          <div id="div_titulo_otros_lugares"style="font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
+                <br> 
+       
+       <div id="div_descrip_obelisco"></div>
+       <br> 
+       <div id="div_distancia_obelisco" style="font-weight:bold;text-decoration: underline" ></div>
+
+        <br> 
+       
+        <div id="div_descrip_la_boca" ></div>
+        <br> 
+       <div id="div_distancia_la_boca" style="font-weight:bold;text-decoration: underline" ></div>
+     <br> 
+
+
+      <div id="div_descrip_tigre"></div>
+      <br> 
+       <div id="div_distancia_tigre" style="font-weight:bold;text-decoration: underline" ></div>
+       <hr/>
+       <br> 
+            <div id="titulo_mapa" style="font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline">Mapa General</div>
+               <br> 
+    <div id="div_mapa" style="height:70%; width:100%"></div>-->
+
+
+
+</body>
+ 
+     <script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+ 
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCTwSyuSvqrNmXA32DrIrHf1VMBx02o0HE&sensor=false&libraries=geometry"></script>
+   
+  
+    <script>
+
+        //var pos_obelisco = new google.maps.LatLng(-34.603683, -58.381569);
+        //var mapOptions = {
+        //    zoom: 18,
+        //    center: pos_obelisco,
+        //    mapTypeId: google.maps.MapTypeId.ROADMAP
+        //};
+        //var mapa = new google.maps.Map($("#div_mapa")[0], mapOptions);
+
+        //var marker = new google.maps.Marker({
+        //    position: pos_obelisco,
+        //    map: mapa,
+
+        //    title: ""
+
+        //});
+
+
+        // ====================================================================
+        // Gestión del ciclo de vida de la app
+        // --------------------------------------------------------------------
+
+        // Eventos Phonegap
+        //        document.addEventListener("deviceready", aplicacionIniciada, false); // Al inciar la app
+        //        document.addEventListener("pause", aplicacionPausada, false);        // Al pausar la app
+        //        document.addEventListener("resume", aplicacionReiniciada, false);    // Al reiniciar la app
+        //        document.addEventListener("online", phonegapOnline, false);          // Phonegap tiene acceso a internet
+        //        document.addEventListener("offline", phonegapOffline, false);        // Phonegap NO tiene acceso a internet
+        //        document.addEventListener("backbutton", atrasPulsado, false);        // Se ha pulsado la tecla atrás
+        //        document.addEventListener("menubutton", menuPulsado, false);         // Se ha pulsado la tecla menú
+        //        document.addEventListener("searchbutton", menuPulsado, false);       // Se ha pulsado la tecla búsqueda
+
+        /**
+        * Aplicación iniciada
+        */
+        function aplicacionIniciada() {
+        }
+
+        /**
+        * Aplicación pausada
+        */
+        function aplicacionPausada() {
+        }
+
+        /**
+        * Aplicación reiniciada
+        */
+        function aplicacionReiniciada() {
+        }
+
+        /**
+        * Phonegap tiene acceso a internet
+        */
+        function phonegapOnline() {
+        }
+
+        /**
+        * Phonegap NO tiene acceso a internet
+        */
+        function phonegapOffline() {
+        }
+
+        /**
+        * Se ha pulsado la tecla atrás
+        */
+        function atrasPulsado() {
+        }
+
+        /**
+        * Se ha pulsado la tecla atrás
+        */
+        function menuPulsado() {
+        }
+
+        /**
+        * Se ha pulsado la tecla búsqueda
+        */
+        function busquedaPulsado() {
+        }
+
+        // ====================================================================
+        // Llamadas a la API
+        // --------------------------------------------------------------------
+
+       
+        
+        
+		 function probarApi2() {
+ 
+ 
+			var pedido = "";
+				
+				$("#div_checkboxes").children("input:checked").map(function() {
+					pedido= this.value;
+				});
+			
+				if	(pedido==""){
+				
+				alert("Debe seleccionar un pedido");
+				return;
+				}
+ 
+ 
+            $.ajax({
+
+                url: 'http://www.mayoristabriny.com/acceso.aspx/AndroidAprobarPedidoPorNro',
+                type: 'POST',
+                data:  '{"pedido":"' + pedido+ '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+				processData: false,
+                success: function (data) {
+			//	alert(data.d);
+                    if (data.d=="True") {
+                       
+					   alert("Pedido aprobado correctamente");
+					   
+					   probarApi();
+					   
+					  
+				   
+					   
+                    }
+                    else {
+                        alert("ERROR AL APROBAR PEDIDO");
+                    }
+                  
+
+                    //alert('Data: ' + data);
+                },
+                error: function (request, error) {
+                    alert("Request: " + JSON.stringify(request));
+                }
+            });
+
+
+        }
+		
+		
+		
+		
+        function probarApi() {
+ 
+		$('#div_checkboxes').empty();
+
+            $.ajax({
+
+                url: 'http://www.mayoristabriny.com/acceso.aspx/AndroidGetPedidosPendientes',
+                type: 'GET',
+             //   data: "{}",
+                  contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+			//	alert(data.d);
+                    if (data!="") {
+                       
+					   var arr = data.d.toString().split(",");
+					   
+					   $.each(arr, function (ind, elem) { 
+
+					   $('<input type="radio" name="dynradio" value ='+elem+' id='+elem+' />'+ elem+'<br />').appendTo('#div_checkboxes');
+
+						//console.log('¡Hola :'+elem+'!'); 
+
+						}); 
+				   
+					   
+                    }
+                    else {
+                        alert("NO HAY PEDIDOS PENDIENTES");
+
+
+
+                    }
+                  
+
+                    //alert('Data: ' + data);
+                },
+                error: function (request, error) {
+                    alert("Request: " + JSON.stringify(request));
+                }
+            });
+
+
+
+            
+
+
+
+            //navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
+
+        /**
+        * http://docs.phonegap.com/en/1.0.0/phonegap_geolocation_geolocation.md.html#Geolocation
+        */
+        function onSuccess(position) {
+
+
+           //  window.location='./pedidos.html';   
+
+
+
+//            var pos_actual = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+//            mapa.panTo(pos_actual);
+
+//            marker.setPosition(pos_actual);
+
+
+           
+//            var pos_boca = new google.maps.LatLng(-34.635786, -58.364893);
+//            var pos_tigre = new google.maps.LatLng(-34.423691, -58.578858);
+
+//           var distancia_obelisco = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco);
+           
+          
+
+
+//           var mensaje_dis = '';
+//            if (distancia_obelisco > 999) 
+//            {
+//                 mensaje_dis = 'Distancia al obelisco: ' + ((distancia_obelisco / 1000)).toFixed(2).toString() + ' Kmt/s.';
+
+//            }
+//            else {
+//                 mensaje_dis = 'Distancia al obelisco: ' + distancia_obelisco.toFixed(2).toString() + ' mts.';
+//            }
+
+
+//             var mensaje_dis_boca = '';
+//             var distancia_boca = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_boca);
+//            if (distancia_boca > 999) 
+//            {
+//                mensaje_dis_boca = 'Distancia a La Boca: ' + ((distancia_boca / 1000)).toFixed(2).toString() + ' Kmt/s.';
+
+//            }
+//            else
+//            {
+//                mensaje_dis_boca = 'Distancia a La Boca: ' + distancia_boca.toFixed(2).toString() + ' mts.';
+//            }
+
+//            var mensaje_dis_tigre = '';
+//            var distancia_tigre = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_tigre);
+//             if (distancia_tigre > 999) 
+//            {
+//                 mensaje_dis_tigre = 'Distancia a Tigre: ' + ((distancia_tigre / 1000)).toFixed(2).toString() + ' Kmt/s.';
+
+//            }
+//            else
+//            {
+//                 mensaje_dis_tigre = 'Distancia a Tigre: ' + distancia_tigre.toFixed(2).toString() + ' mts.';
+//            }
+
+
+
+//            var titulo = '- Otros lugares para visitar -'
+
+//            var descrip_obelisco = ' Obelisco de Buenos Aires: es un monumento considerado un ícono de la ciudad de Buenos Aires, visita turística obligada, construido en 1936.' +
+//            ' Está ubicado en la intersección de las avenidas Corrientes y 9 de Julio.';
+
+////            var mensaje_obelisco = (descrip_obelisco).toString() + '\n' + '\n' + mensaje_dis.toString();
+         
+          
+//            var descrip_boca = 'Barrio de la Boca: Característicamente colorido a orillas del Riachuelo, con aire nostálgico aunque alegre. Así es el barrio de La Boca.Figura entre los sectores porteños más visitados por los turistas, debido a su esencia tanguera, su expresión artística, sus tradiciones y su pasión futbolera.';
+//            var mensaje_boca = mensaje_dis_boca;
+
+
+//            var descrip_tigre = 'Tigre:Fluvial, pintoresca y serena, la ciudad de Tigre se sitúa al noreste de la provincia de Buenos Aires instituyéndose como uno de sus más conocidos centros turísticos, y basando su propuesta en excursiones navegables, estadías en islas y alternativas portuarias.';
+//            var mensaje_tigre = mensaje_dis_tigre;
+
+           
+//            document.getElementById('div_titulo_otros_lugares').innerHTML = titulo.toString();
+//            document.getElementById('div_descrip_obelisco').innerHTML = descrip_obelisco.toString() ;
+//            document.getElementById('div_distancia_obelisco').innerHTML = mensaje_dis;
+
+
+//            document.getElementById('div_descrip_la_boca').innerHTML = descrip_boca;
+//            document.getElementById('div_distancia_la_boca').innerHTML = mensaje_dis_boca;
+//            document.getElementById('div_descrip_tigre').innerHTML = descrip_tigre;
+//            document.getElementById('div_distancia_tigre').innerHTML = mensaje_dis_tigre;
+
+        
+//            document.getElementById('titulo_mapa').innerHTML = 'Ud está aquí / You are here';
+
+
+
+          //   setTimeout(probarApi, 1000);
+
+
+
+
+        };
+
+        /**
+        * http://docs.phonegap.com/en/1.0.0/phonegap_geolocation_geolocation.md.html#Geolocation
+        */
+        function onError(error) {
+            var mensaje =
+                'code: ' + error.code + '\n' +
+                'message: ' + error.message + '\n';
+
+            navigator.notification.alert
+            (
+                mensaje,        // message
+                alertDismissed, // callback
+                '¡Error!',      // title
+                '¡Hecho!'       // buttonName
+            );
+        }
+
+        /**
+        * http://docs.phonegap.com/en/1.0.0/phonegap_notification_notification.md.html#Notification
+        */
+        function alertDismissed() {
+        }
+    </script>
+</html>

@@ -4,22 +4,48 @@
 <head>
  
     <meta charset="utf-8"> 
-    <title>TFI 2013-Tour Guide Apk</title>  
+    <title>TFI 2015-Mayorista Briny</title>  
 </head>
  
 <body style="margin: 20px; text-align: center; height:100%; width:100%; background-color:#F5F5F5">
   
-    <h1 style="margin: 0px; padding: 0px; background-color:Blue; font-family:arial;color:white" >TFI 2013 - Tour Guide Apk -</h1>
+    <h1 style="margin: 0px; padding: 0px; background-color:green; font-family:arial;color:white" >TFI 2015-Mayorista Briny</h1>
     <hr/>
      
+
+    
+    <div id ="login">
+
+        <table align="center" style=text-align: center;">
+            <tr>
+                <td>
+
+
+       <label id="lbl_usuario">Usuario:</label></td>
+                     <td>
+                     <input type="text" id="txt_usuario" />
+                    </td>
+       </tr>
+         <tr>
+                <td>
+    
+       <label id="lbl_clave">Clave: </label></td><td> <input type="password" id="txt_password" />
+                           </td>
+       </tr>
+        </table>
+
+    </div>
+
+
+
     <p style="margin: 0px; padding: 10px 0px 10px 0px;">
-        <a href="javascript: probarApi();">Ubicarme en mapa</a>
+        <a href="javascript: probarApi();">Acceder</a>
     </p>
      
 
       <hr/>
 
-          <div id="div_titulo_otros_lugares"style="font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
+<!--          <div id="div_titulo_otros_lugares"style="font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline"></div>
                 <br> 
        
        <div id="div_descrip_obelisco"></div>
@@ -41,7 +67,10 @@
        <br> 
             <div id="titulo_mapa" style="font-style:italic; color:Red; font-family:Verdana; font-weight:bold;text-decoration: underline">Mapa General</div>
                <br> 
-    <div id="div_mapa" style="height:70%; width:100%"></div>
+    <div id="div_mapa" style="height:70%; width:100%"></div>-->
+
+
+
 </body>
  
      <script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"></script>
@@ -52,21 +81,21 @@
   
     <script>
 
-        var pos_obelisco = new google.maps.LatLng(-34.603683, -58.381569);
-        var mapOptions = {
-            zoom: 18,
-            center: pos_obelisco,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var mapa = new google.maps.Map($("#div_mapa")[0], mapOptions);
+        //var pos_obelisco = new google.maps.LatLng(-34.603683, -58.381569);
+        //var mapOptions = {
+        //    zoom: 18,
+        //    center: pos_obelisco,
+        //    mapTypeId: google.maps.MapTypeId.ROADMAP
+        //};
+        //var mapa = new google.maps.Map($("#div_mapa")[0], mapOptions);
 
-        var marker = new google.maps.Marker({
-            position: pos_obelisco,
-            map: mapa,
+        //var marker = new google.maps.Marker({
+        //    position: pos_obelisco,
+        //    map: mapa,
 
-            title: ""
+        //    title: ""
 
-        });
+        //});
 
 
         // ====================================================================
@@ -139,7 +168,50 @@
         * Pruebas de la API
         */
         function probarApi() {
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+            var usuario = $("#txt_usuario").val();
+            var clave = $("#txt_password").val();
+
+            var acceso_correcto = false;
+
+
+            $.ajax({
+                url: 'http://www.mayoristabriny.com/acceso.aspx/LoginAndroid',
+                type: 'POST',
+                data: '{"usuario":"' + usuario + '","clave":"' + clave + '"}',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+
+				
+                    if (data.d == "True") {
+
+                        acceso_correcto = true;
+                       window.location = 'pedidos.html';
+                    }
+                    else {
+                        alert("Usuario o clave incorrectos");
+
+
+
+                    }
+                  
+
+                    //alert('Data: ' + data);
+                },
+                error: function (request, error) {
+                    alert("Request: " + request);
+                    //window.location = 'pedidos.html';
+                }
+            });
+
+
+
+            
+
+
+
+            //navigator.geolocation.getCurrentPosition(onSuccess, onError);
         }
 
         /**
@@ -147,100 +219,98 @@
         */
         function onSuccess(position) {
 
-//            var mensaje =
-//                'Latitude: ' + position.coords.latitude + '\n' +
-//                'Longitude: ' + position.coords.longitude + '\n' +
-//                'Altitude: ' + position.coords.altitude + '\n' +
-//                'Accuracy: ' + position.coords.accuracy + '\n' +
-//                'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-//                'Heading: ' + position.coords.heading + '\n' +
-//                'Speed: ' + position.coords.speed + '\n' +
-//                'Timestamp: ' + new Date(position.timestamp) + '\n';
 
-            var pos_actual = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            mapa.panTo(pos_actual);
+            //window.location='./pedidos.html';   
 
-            marker.setPosition(pos_actual);
+
+
+//            var pos_actual = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+//            mapa.panTo(pos_actual);
+
+//            marker.setPosition(pos_actual);
 
 
            
-            var pos_boca = new google.maps.LatLng(-34.635786, -58.364893);
-            var pos_tigre = new google.maps.LatLng(-34.423691, -58.578858);
+//            var pos_boca = new google.maps.LatLng(-34.635786, -58.364893);
+//            var pos_tigre = new google.maps.LatLng(-34.423691, -58.578858);
 
-           var distancia_obelisco = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco);
+//           var distancia_obelisco = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_obelisco);
            
           
 
 
-           var mensaje_dis = '';
-            if (distancia_obelisco > 999) 
-            {
-                 mensaje_dis = 'Distancia al obelisco: ' + ((distancia_obelisco / 1000)).toFixed(2).toString() + ' Kmt/s.';
+//           var mensaje_dis = '';
+//            if (distancia_obelisco > 999) 
+//            {
+//                 mensaje_dis = 'Distancia al obelisco: ' + ((distancia_obelisco / 1000)).toFixed(2).toString() + ' Kmt/s.';
 
-            }
-            else {
-                 mensaje_dis = 'Distancia al obelisco: ' + distancia_obelisco.toFixed(2).toString() + ' mts.';
-            }
-
-
-             var mensaje_dis_boca = '';
-             var distancia_boca = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_boca);
-            if (distancia_boca > 999) 
-            {
-                mensaje_dis_boca = 'Distancia a La Boca: ' + ((distancia_boca / 1000)).toFixed(2).toString() + ' Kmt/s.';
-
-            }
-            else
-            {
-                mensaje_dis_boca = 'Distancia a La Boca: ' + distancia_boca.toFixed(2).toString() + ' mts.';
-            }
-
-            var mensaje_dis_tigre = '';
-            var distancia_tigre = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_tigre);
-             if (distancia_tigre > 999) 
-            {
-                 mensaje_dis_tigre = 'Distancia a Tigre: ' + ((distancia_tigre / 1000)).toFixed(2).toString() + ' Kmt/s.';
-
-            }
-            else
-            {
-                 mensaje_dis_tigre = 'Distancia a Tigre: ' + distancia_tigre.toFixed(2).toString() + ' mts.';
-            }
+//            }
+//            else {
+//                 mensaje_dis = 'Distancia al obelisco: ' + distancia_obelisco.toFixed(2).toString() + ' mts.';
+//            }
 
 
+//             var mensaje_dis_boca = '';
+//             var distancia_boca = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_boca);
+//            if (distancia_boca > 999) 
+//            {
+//                mensaje_dis_boca = 'Distancia a La Boca: ' + ((distancia_boca / 1000)).toFixed(2).toString() + ' Kmt/s.';
 
-            var titulo = '- Otros lugares para visitar -'
+//            }
+//            else
+//            {
+//                mensaje_dis_boca = 'Distancia a La Boca: ' + distancia_boca.toFixed(2).toString() + ' mts.';
+//            }
 
-            var descrip_obelisco = ' Obelisco de Buenos Aires: es un monumento considerado un ícono de la ciudad de Buenos Aires, visita turística obligada, construido en 1936.' +
-            ' Está ubicado en la intersección de las avenidas Corrientes y 9 de Julio.';
+//            var mensaje_dis_tigre = '';
+//            var distancia_tigre = google.maps.geometry.spherical.computeDistanceBetween(pos_actual, pos_tigre);
+//             if (distancia_tigre > 999) 
+//            {
+//                 mensaje_dis_tigre = 'Distancia a Tigre: ' + ((distancia_tigre / 1000)).toFixed(2).toString() + ' Kmt/s.';
 
-//            var mensaje_obelisco = (descrip_obelisco).toString() + '\n' + '\n' + mensaje_dis.toString();
+//            }
+//            else
+//            {
+//                 mensaje_dis_tigre = 'Distancia a Tigre: ' + distancia_tigre.toFixed(2).toString() + ' mts.';
+//            }
+
+
+
+//            var titulo = '- Otros lugares para visitar -'
+
+//            var descrip_obelisco = ' Obelisco de Buenos Aires: es un monumento considerado un ícono de la ciudad de Buenos Aires, visita turística obligada, construido en 1936.' +
+//            ' Está ubicado en la intersección de las avenidas Corrientes y 9 de Julio.';
+
+////            var mensaje_obelisco = (descrip_obelisco).toString() + '\n' + '\n' + mensaje_dis.toString();
          
           
-            var descrip_boca = 'Barrio de la Boca: Característicamente colorido a orillas del Riachuelo, con aire nostálgico aunque alegre. Así es el barrio de La Boca.Figura entre los sectores porteños más visitados por los turistas, debido a su esencia tanguera, su expresión artística, sus tradiciones y su pasión futbolera.';
-            var mensaje_boca = mensaje_dis_boca;
+//            var descrip_boca = 'Barrio de la Boca: Característicamente colorido a orillas del Riachuelo, con aire nostálgico aunque alegre. Así es el barrio de La Boca.Figura entre los sectores porteños más visitados por los turistas, debido a su esencia tanguera, su expresión artística, sus tradiciones y su pasión futbolera.';
+//            var mensaje_boca = mensaje_dis_boca;
 
 
-            var descrip_tigre = 'Tigre:Fluvial, pintoresca y serena, la ciudad de Tigre se sitúa al noreste de la provincia de Buenos Aires instituyéndose como uno de sus más conocidos centros turísticos, y basando su propuesta en excursiones navegables, estadías en islas y alternativas portuarias.';
-            var mensaje_tigre = mensaje_dis_tigre;
+//            var descrip_tigre = 'Tigre:Fluvial, pintoresca y serena, la ciudad de Tigre se sitúa al noreste de la provincia de Buenos Aires instituyéndose como uno de sus más conocidos centros turísticos, y basando su propuesta en excursiones navegables, estadías en islas y alternativas portuarias.';
+//            var mensaje_tigre = mensaje_dis_tigre;
 
            
-            document.getElementById('div_titulo_otros_lugares').innerHTML = titulo.toString();
-            document.getElementById('div_descrip_obelisco').innerHTML = descrip_obelisco.toString() ;
-            document.getElementById('div_distancia_obelisco').innerHTML = mensaje_dis;
+//            document.getElementById('div_titulo_otros_lugares').innerHTML = titulo.toString();
+//            document.getElementById('div_descrip_obelisco').innerHTML = descrip_obelisco.toString() ;
+//            document.getElementById('div_distancia_obelisco').innerHTML = mensaje_dis;
 
 
-            document.getElementById('div_descrip_la_boca').innerHTML = descrip_boca;
-            document.getElementById('div_distancia_la_boca').innerHTML = mensaje_dis_boca;
-            document.getElementById('div_descrip_tigre').innerHTML = descrip_tigre;
-            document.getElementById('div_distancia_tigre').innerHTML = mensaje_dis_tigre;
+//            document.getElementById('div_descrip_la_boca').innerHTML = descrip_boca;
+//            document.getElementById('div_distancia_la_boca').innerHTML = mensaje_dis_boca;
+//            document.getElementById('div_descrip_tigre').innerHTML = descrip_tigre;
+//            document.getElementById('div_distancia_tigre').innerHTML = mensaje_dis_tigre;
 
         
-            document.getElementById('titulo_mapa').innerHTML = 'Ud está aquí / You are here';
+//            document.getElementById('titulo_mapa').innerHTML = 'Ud está aquí / You are here';
 
 
 
-            setTimeout(probarApi, 1000);
+            //setTimeout(probarApi, 1000);
+
+
+
 
         };
 

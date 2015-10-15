@@ -7,14 +7,14 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>TFI-APK Pedidos Briny</name>
+    <name>Vecinos Organizados</name>
 
     <description>
-        TFI-2015-Iglesias
+        VO
     </description>
 
     <author href="https://build.phonegap.com" email="support@phonegap.com">
-       Fernando Iglesias 
+       Cevey-Zambrano 
     </author>
         
     <access origin="*"/>

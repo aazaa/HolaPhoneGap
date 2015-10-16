@@ -59,7 +59,10 @@
              Menu.InicioPorDefault();
 		alert("Después de inicio");
          });
-
+window.onerror = function(msg, url, linenumber) {
+    alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+    return true;
+}
 
 </script>
 <!--

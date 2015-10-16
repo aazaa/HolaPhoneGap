@@ -55,9 +55,9 @@
 
 <script type="text/javascript">
     var $jq = jQuery.noConflict();
-         $jq(document).ready(function () {
+         $jq(document).ready(function ($) {
          	alert("antes de inicio");
-             Menu.InicioPorDefault();
+             Menu.InicioPorDefault($);
 		alert("Después de inicio");
          });
 window.onerror = function(msg, url, linenumber) {

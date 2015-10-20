@@ -1,0 +1,31 @@
+.globo
+{
+    width: 250px;
+    height: 70px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 3px;
+    position: relative;
+    font-family: 'Segoe UI';
+    font-size: 13px;
+    margin-left: 5px;
+}
+.robo {
+    background: rgba(255, 0, 0, 0.8) url("../Imagenes/robo.png") no-repeat scroll 230px -10px / 30px auto;
+    border: 2px solid #FF0000;
+    color: #FFF;
+}
+
+.sospechoso
+{
+    background: rgba(255, 116, 0, 0.8) url("../Imagenes/alerta.png") no-repeat scroll 230px -10px / 30px auto;
+    border: 2px solid #FF7400;
+    color: #FFF;
+}
+
+.accidente
+{
+    background: rgba(255, 216, 0, 0.8) url("../Imagenes/accidente.png") no-repeat scroll 230px -10px / 30px auto;
+    border: 2px solid #FFD800;
+    color: #FFF;
+}

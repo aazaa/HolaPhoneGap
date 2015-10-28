@@ -170,6 +170,61 @@ a:hover {
 	color: #89867e;
 }
 
+
+.btn
+{
+    background-color: #0074cc;
+    background-repeat: repeat-x;
+    border-left-color: #0055cc;
+    border-right-color: #0055cc;
+    border-top-color: #0055cc;
+    border-bottom-color: #003580;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    border-right: 0 none #e6e6e6;
+    border-top: 0 none #e6e6e6;
+    border-bottom: 0 none #b3b3b3;
+    display: inline;
+    padding: 4px 10px 4px;
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 4px;
+    zoom: 1;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn:hover
+{
+    background-color: #0094ff;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    background-position: 0 -15px;
+    transition: background-position 0.1s linear;
+}
+.btn:focus
+{
+    outline: thin dotted #333;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+.btn:active
+{
+    background-color: #0055cc;
+    background-image: none;
+    outline: 0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+
+
+
+
 @media screen and (max-width: 46.0625em) {
 
 	.main {
